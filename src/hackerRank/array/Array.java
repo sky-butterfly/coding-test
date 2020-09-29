@@ -1,4 +1,4 @@
-package hackerRank.java;
+package hackerRank.array;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
