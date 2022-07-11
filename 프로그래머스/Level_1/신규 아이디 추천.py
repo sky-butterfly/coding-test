@@ -16,10 +16,6 @@ def solution(new_id):
         
         answer.append(n)
         
-    # 5단계
-    if len(answer) < 1:
-        answer.append('a')
-        
     while len(answer) > 0:            
         # 4단계
         n = answer[len(answer)-1]
