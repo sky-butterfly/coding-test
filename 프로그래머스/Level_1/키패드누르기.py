@@ -1,46 +1,39 @@
 def solution(numbers, hand):
-    answer = ''
-
-    cursor = {'r' : [0,0], 'l' : [2,0]}
-    phone = [[1,0], [0,3], [1,3], [2,3], [0,2], [1,2], [2,2], [0,1], [1,1], [2,1]]
+    answer = []
     
-    for n in numbers :
+    leftArr = [1, 4, 7]
+    rightArr = [3, 6, 9]
+    pad = [[1,0], [0,3], [1,3], [2,3], [0,2], [1,2], [2,2], [0,1], [1,1], [2,1]]
+    leftHand = [0,0]
+    rightHand = [2,0]
+    
+    for n in numbers:
+        
+        if n in leftArr:
+            answer.append('L')
+            leftHand = pad[n]
 
-        if n == 1 or n == 4 or n == 7 :
-            answer += 'L';
-            cursor['l'] = phone[n]
-        elif n == 3 or n == 6 or n == 9 :
-            answer += 'R';
-            cursor['r'] = phone[n]
-        else:            
-            p = phone[n]
+        elif n in rightArr:
+            answer.append('R')
+            rightHand = pad[n]
+        
+        else:
+            leftDistance = abs(leftHand[0] - pad[n][0]) + abs(leftHand[1] - pad[n][1])
+            righDistance = abs(rightHand[0] - pad[n][0]) + abs(rightHand[1] - pad[n][1])
 
-            r = cursor['r']   
-            rx = r[0]-p[0]
-            ry = r[1]-p[1]
-            if(ry < 0):
-                ry = ry * -1
-            
-            l = cursor['l']
-            lx = p[0] - l[0]
-            ly = p[1] - l[1]
-            if(ly < 0):
-                ly = ly * -1
-            
-            if (rx+ry) > (lx+ly):
-                answer += 'L';
-                cursor['l'] = phone[n]
-            elif (lx+ly) > (rx+ry):
-                answer += 'R';
-                cursor['r'] = phone[n]
+            distance = leftDistance - righDistance
+            if distance > 0 :
+                answer.append('R')
+                rightHand = pad[n]
+            elif distance < 0 :
+                answer.append('L')
+                leftHand = pad[n]
             else :
-                if hand == "right":
-                    answer += 'R'
-                    cursor['r'] = phone[n]
+                if hand == 'right':
+                    answer.append('R')
+                    rightHand = pad[n]
                 else :
-                    answer += 'L'
-                    cursor['l'] = phone[n]              
+                    answer.append('L')
+                    leftHand = pad[n]
 
-    return answer
-
-print(solution([1,3,4,5,8,2,1,4,5,9,5], "right"))
+    return ''.join(answer)
