@@ -57,3 +57,5 @@ def solution(str1, str2):
         answer = len(x) / len(y)
     
     return math.trunc(answer*65536)
+
+# 출처: 프로그래머스 코딩 테스트 연습, https://school.programmers.co.kr/learn/challenges

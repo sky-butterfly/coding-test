@@ -15,3 +15,5 @@ def dfs(i, computers, check, n):
         if computers[i][j] == 1 and j not in check:
             check.append(i)
             dfs(j, computers, check, n)
+
+# 출처: 프로그래머스 코딩 테스트 연습, https://school.programmers.co.kr/learn/challenges
